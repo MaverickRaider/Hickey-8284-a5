@@ -1,15 +1,11 @@
 package ucf.assignments;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-import java.math.BigDecimal;
-
 public class Item {
-    private final StringProperty itemName;
     private final StringProperty itemSerialNumber;
+    private final StringProperty itemName;
     private final StringProperty itemValue;
 
     public Item() {
@@ -17,10 +13,23 @@ public class Item {
     }
 
     public Item (String itemName, String itemSerialNumber, String itemValue) {
-        this.itemName = new SimpleStringProperty(itemName);
         this.itemSerialNumber = new SimpleStringProperty(itemSerialNumber);
+        this.itemName = new SimpleStringProperty(itemName);
         this.itemValue = new SimpleStringProperty(itemValue);
     }
+
+    public void setItemSerialNumber(String itemSerialNumber) {
+        this.itemSerialNumber.set(itemSerialNumber);
+    }
+
+    public String getItemSerialNumber() {
+        return itemSerialNumber.get();
+    }
+
+    public StringProperty itemSerialNumberProperty() {
+        return itemSerialNumber;
+    }
+
 
     public void setItemName(String itemName) {
         this.itemName.set(itemName);
@@ -34,17 +43,6 @@ public class Item {
         return itemName;
     }
 
-    public void setItemSerialNumber(String itemSerialNumber) {
-        this.itemName.set(itemSerialNumber);
-    }
-
-    public String getItemSerialNumber() {
-        return itemSerialNumber.get();
-    }
-
-    public StringProperty itemSerialNumberProperty() {
-        return itemSerialNumber;
-    }
 
     public void setItemValue(String itemValue) {
         this.itemValue.set(itemValue);

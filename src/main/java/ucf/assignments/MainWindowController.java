@@ -10,6 +10,12 @@ import java.math.BigDecimal;
 public class MainWindowController {
     @FXML
     private TableView<Item> itemsTableView;
+    @FXML
+    private TableColumn<Item, String> itemsSerialColumn;
+    @FXML
+    private TableColumn<Item, String> itemsNameColumn;
+    @FXML
+    private TableColumn<Item, String> itemsValueColumn;
 
     private App mainApp;
 
@@ -18,6 +24,9 @@ public class MainWindowController {
 
     @FXML
     private void initialize() {
+        itemsSerialColumn.setCellValueFactory(cellData -> cellData.getValue().itemSerialNumberProperty());
+        itemsNameColumn.setCellValueFactory(cellData -> cellData.getValue().itemNameProperty());
+        itemsValueColumn.setCellValueFactory(cellData -> cellData.getValue().itemValueProperty());
     }
 
     public void setMainApp(App mainApp) {
