@@ -30,7 +30,11 @@ public class MainWindowController {
         handleAddItem();
     }
     private void handleAddItem(){
-
+        Item tempItem = new Item();
+        boolean okClicked = mainApp.showAddLayout(tempItem);
+        if (okClicked) {
+            mainApp.getItemData().add(tempItem);
+        }
     }
 
     @FXML

@@ -2,8 +2,7 @@ package ucf.assignments;
 
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
-
-import java.awt.*;
+import javafx.scene.control.TextField;
 
 public class AddItemWindowController {
 
