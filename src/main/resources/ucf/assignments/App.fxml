@@ -37,11 +37,11 @@
       </MenuBar>
    </top>
    <center>
-      <TableView fx:id="itemsTableView" BorderPane.alignment="CENTER">
+      <TableView fx:id="itemsTableView" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn fx:id="itemsSerialNumberColumn" prefWidth="75.0" text="Serial #" />
-          <TableColumn fx:id="itemsNameColumn" prefWidth="75.0" text="Name" />
-            <TableColumn fx:id="itemsValueColumn" prefWidth="75.0" text="Value" />
+          <TableColumn fx:id="itemsSerialNumberColumn" prefWidth="200.0" text="Serial #" />
+          <TableColumn fx:id="itemsNameColumn" prefWidth="200.0" text="Name" />
+            <TableColumn fx:id="itemsValueColumn" prefWidth="200.0" text="Value" />
         </columns>
       </TableView>
    </center>

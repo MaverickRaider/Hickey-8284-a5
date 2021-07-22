@@ -51,7 +51,9 @@ public class MainWindowController {
         handleSaveAs();
     }
     private void handleSaveAs() {
-
+        /**
+         * save to file
+         */
     }
 
     @FXML
@@ -59,7 +61,9 @@ public class MainWindowController {
         handleLoad();
     }
     private void handleLoad() {
-
+        /**
+         * load list from file
+         */
     }
 
     @FXML
@@ -67,7 +71,7 @@ public class MainWindowController {
         handleClose();
     }
     private void handleClose() {
-
+        System.exit(0);
     }
 
     @FXML

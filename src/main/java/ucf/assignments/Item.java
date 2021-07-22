@@ -10,16 +10,20 @@ import java.math.BigDecimal;
 public class Item {
     private final StringProperty itemName;
     private final StringProperty itemSerialNumber;
-    private final BigDecimal itemValue;
+    private final StringProperty itemValue;
 
     public Item() {
         this(null, null, null);
     }
 
-    public Item (String itemName, String itemSerialNumber, Double itemValue) {
+    public Item (String itemName, String itemSerialNumber, String itemValue) {
         this.itemName = new SimpleStringProperty(itemName);
         this.itemSerialNumber = new SimpleStringProperty(itemSerialNumber);
-        this.itemValue = new BigDecimal(itemValue);
+        this.itemValue = new SimpleStringProperty(itemValue);
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName.set(itemName);
     }
 
     public String getItemName() {
@@ -30,6 +34,10 @@ public class Item {
         return itemName;
     }
 
+    public void setItemSerialNumber(String itemSerialNumber) {
+        this.itemName.set(itemSerialNumber);
+    }
+
     public String getItemSerialNumber() {
         return itemSerialNumber.get();
     }
@@ -38,7 +46,15 @@ public class Item {
         return itemSerialNumber;
     }
 
-    public BigDecimal getItemValue() {
+    public void setItemValue(String itemValue) {
+        this.itemValue.set(itemValue);
+    }
+
+    public String getItemValue() {
+        return itemValue.get();
+    }
+
+    public StringProperty itemValueProperty() {
         return itemValue;
     }
 }
