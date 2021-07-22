@@ -1,0 +1,80 @@
+@startuml
+
+class InventoryTracker {
+    start()
+    main()
+}
+
+class SceneManager {
+    scenes: Map<String, Scene>
+
+    load()
+    getScene(String): Scene;
+}
+
+class MainWindowController {
+    items: ItemModel
+    scenes: SceneManager
+    fileManger: FileManger
+
+    + MainWindowController(ItemModel, SceneManager)
+
+    addItemButtonClicked(EventHandler)
+    editItemButtonClicked(EventHandler)
+    removeItemButtonClicked(EventHandler)
+    saveInventoryAsCVSButtonClicked(EventHandler)
+    '...
+
+    addItem(String, String BigDecimal)
+    editItem()
+    saveInventoryAsCVS(filename: String)
+    saveInventoryAsHTML(filename: String)
+    saveInventoryAsJSON(filename: String)
+}
+
+class AddItemController {
+}
+
+class EditItemWindowController {
+}
+
+class RemoveItemController {
+}
+
+class SearchItemController {
+}
+
+class Item {
+    - name: SimpleStringProperty
+    - serialNumber: SimpleStringProperty
+    - value: SimpleDoubleProperty
+
+    + getName()
+    + setName()
+    + nameProperty()
+    + getSerialNumber()
+    '...
+}
+
+class FileManger {
+    saveAsCVS(filename: String, data: String)
+    saveAsHTML(filename: String, data: String)
+    saveAsJSON(filename: String, data: String)
+}
+
+openjfx.org.Applications <|-- InventoryTracker
+InventoryTracker -- SceneManager
+SceneManager -- MainWindowController
+SceneManager -- AddItemController
+SceneManager -- EditItemWindowController
+SceneManager -- RemoveItemController
+SceneManager -- SearchItemController
+MainWindowController o-- ItemModel
+AddItemController o-- ItemModel
+EditItemWindowController o-- ItemModel
+RemoveItemController o-- ItemModel
+SearchItemController o-- ItemModel
+ItemModel *-- Item
+MainWindowController o-- FileManger
+
+@enduml
