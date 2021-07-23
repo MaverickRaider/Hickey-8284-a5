@@ -1,11 +1,7 @@
 package ucf.assignments;
 
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-
-import java.math.BigDecimal;
 
 public class MainWindowController {
     @FXML

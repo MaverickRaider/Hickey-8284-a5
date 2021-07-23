@@ -67,14 +67,11 @@ public class AddItemWindowController {
         if (itemNameField.getText() == null || itemNameField.getText().length() == 0) {
             errorMessage += "Error: Must have a Title!\n";
         }
-        if (serialNumberField.getText() == null || serialNumberField.getText().length() == 0) {
-            errorMessage += "Error: Must have a Serial Number!\n";
-        }
-        if (serialNumberField.getText().length() < 10 || serialNumberField.getText().length() > 10) {
-            errorMessage += "Error: Serial Number needs 10 characters!\n";
+        if (serialNumberField.getText() == null || serialNumberField.getText().length() > 10 || serialNumberField.getText().length() > 10) {
+            errorMessage += "Error: Must have a 10 Character Serial Number!\n";
         }
         if (itemValueField.getText() == null || itemValueField.getText().length() == 0) {
-            errorMessage += "Error: Must have Value!\n";
+            errorMessage += "Error: Must have a Value!\n";
         }
 
         if (errorMessage.length() == 0) {
