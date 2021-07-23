@@ -5,6 +5,10 @@ import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+
 public class AddItemWindowController {
 
     @FXML
@@ -30,8 +34,11 @@ public class AddItemWindowController {
         this.item = item;
 
         itemNameField.setText(item.getItemName());
+        itemNameField.setPromptText("2 - 256 Characters");
         serialNumberField.setText(item.getItemSerialNumber());
+        serialNumberField.setPromptText("XXXXXXXXXX");
         itemValueField.setText(item.getItemValue());
+        itemValueField.setPromptText("In US Cents");
     }
 
     public boolean isOkClicked() {
@@ -46,11 +53,18 @@ public class AddItemWindowController {
         if (isInputValid()) {
             item.setItemName(itemNameField.getText());
             item.setItemSerialNumber(serialNumberField.getText());
-            item.setItemValue(itemValueField.getText());
+            item.setItemValue("$" + usCurrencyFormatter(itemValueField.getText()));
 
             okClicked = true;
             dialogStage.close();
         }
+    }
+
+    private BigDecimal usCurrencyFormatter (String str) {
+        BigDecimal answer = new BigDecimal(str);
+        BigDecimal divisor = new BigDecimal("100");
+        answer = answer.divide(divisor);
+        return answer;
     }
 
     @FXML
@@ -64,8 +78,8 @@ public class AddItemWindowController {
     private boolean isInputValid() {
         String errorMessage = "";
 
-        if (itemNameField.getText() == null || itemNameField.getText().length() == 0) {
-            errorMessage += "Error: Must have a Title!\n";
+        if (itemNameField.getText() == null || itemNameField.getText().length() < 2 || itemNameField.getText().length() > 256) {
+            errorMessage += "Error: Must have a Title between 2 - 256 Characters!\n";
         }
         if (serialNumberField.getText() == null || serialNumberField.getText().length() > 10 || serialNumberField.getText().length() > 10) {
             errorMessage += "Error: Must have a 10 Character Serial Number!\n";
@@ -88,4 +102,5 @@ public class AddItemWindowController {
             return false;
         }
     }
+
 }

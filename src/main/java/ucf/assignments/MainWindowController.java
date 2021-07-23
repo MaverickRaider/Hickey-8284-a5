@@ -1,7 +1,12 @@
 package ucf.assignments;
 
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+
+import java.util.function.Predicate;
+
 
 public class MainWindowController {
     @FXML
@@ -12,6 +17,9 @@ public class MainWindowController {
     private TableColumn<Item, String> itemsNameColumn;
     @FXML
     private TableColumn<Item, String> itemsValueColumn;
+    @FXML
+    private TextField searchBox;
+
 
     private App mainApp;
 
@@ -28,6 +36,33 @@ public class MainWindowController {
     public void setMainApp(App mainApp) {
         this.mainApp = mainApp;
         itemsTableView.setItems(mainApp.getItemData());
+
+        FilteredList<Item> filteredData = new FilteredList<>(mainApp.getItemData());
+        itemsTableView.setItems(filteredData);
+
+        searchBox.textProperty().addListener((observable, oldValue, newValue) ->
+                filteredData.setPredicate(item -> {
+                    if (newValue == null || newValue.isEmpty()) {
+                        return true;
+                    }
+
+                    String lowerCaseFilter = newValue.toLowerCase();
+                    if (item.getItemName().toLowerCase().contains(lowerCaseFilter)) {
+                        return true;
+                    }
+                    else if (item.getItemValue().toLowerCase().contains(lowerCaseFilter)) {
+                        return true;
+                    }
+                    else if (item.getItemSerialNumber().toLowerCase().contains(lowerCaseFilter)) {
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+                }));
+        SortedList<Item> sortedList = new SortedList<>(filteredData);
+
+        itemsTableView.setItems(sortedList);
     }
 
     @FXML
@@ -90,14 +125,6 @@ public class MainWindowController {
     }
     private void handleClose() {
         System.exit(0);
-    }
-
-    @FXML
-    public void searchMenuClicked() {
-        handleSearch();
-    }
-    private void handleSearch() {
-
     }
 
     @FXML

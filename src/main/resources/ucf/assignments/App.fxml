@@ -8,34 +8,12 @@
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ucf.assignments.MainWindowController">
-   <top>
-      <MenuBar BorderPane.alignment="CENTER">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-                  <MenuItem mnemonicParsing="false" onAction="#saveAsMenuClicked" text="Save As" />
-                  <MenuItem mnemonicParsing="false" onAction="#loadMenuClicked" text="Load" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-              <MenuItem mnemonicParsing="false" onAction="#closedMenuClicked" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Find">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#searchMenuClicked" text="Search" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#aboutMenuClicked" text="About" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-   </top>
    <center>
       <TableView fx:id="itemsTableView" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
         <columns>
@@ -57,4 +35,33 @@
          </padding>
       </HBox>
    </bottom>
+   <top>
+      <VBox BorderPane.alignment="CENTER">
+         <children>
+            <MenuBar>
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                        <MenuItem mnemonicParsing="false" onAction="#saveAsMenuClicked" text="Save As" />
+                        <MenuItem mnemonicParsing="false" onAction="#loadMenuClicked" text="Load" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                    <MenuItem mnemonicParsing="false" onAction="#closedMenuClicked" text="Close" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <items>
+                    <MenuItem mnemonicParsing="false" onAction="#aboutMenuClicked" text="About" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+            <HBox>
+               <children>
+                  <Button mnemonicParsing="false" text="Search" />
+                  <TextField fx:id="searchBox" prefHeight="25.0" prefWidth="548.0" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </top>
 </BorderPane>
