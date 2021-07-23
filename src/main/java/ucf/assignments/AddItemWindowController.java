@@ -1,6 +1,7 @@
 package ucf.assignments;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 
@@ -42,12 +43,14 @@ public class AddItemWindowController {
         handleOkClicked();
     }
     private void handleOkClicked() {
-        item.setItemName(itemNameField.getText());
-        item.setItemSerialNumber(serialNumberField.getText());
-        item.setItemValue(itemValueField.getText());
+        if (isInputValid()) {
+            item.setItemName(itemNameField.getText());
+            item.setItemSerialNumber(serialNumberField.getText());
+            item.setItemValue(itemValueField.getText());
 
-        okClicked = true;
-        dialogStage.close();
+            okClicked = true;
+            dialogStage.close();
+        }
     }
 
     @FXML
@@ -56,5 +59,36 @@ public class AddItemWindowController {
     }
     private void handleCancelClicked() {
         dialogStage.close();
+    }
+
+    private boolean isInputValid() {
+        String errorMessage = "";
+
+        if (itemNameField.getText() == null || itemNameField.getText().length() == 0) {
+            errorMessage += "Error: Must have a Title!\n";
+        }
+        if (serialNumberField.getText() == null || serialNumberField.getText().length() == 0) {
+            errorMessage += "Error: Must have a Serial Number!\n";
+        }
+        if (serialNumberField.getText().length() < 10 || serialNumberField.getText().length() > 10) {
+            errorMessage += "Error: Serial Number needs 10 characters!\n";
+        }
+        if (itemValueField.getText() == null || itemValueField.getText().length() == 0) {
+            errorMessage += "Error: Must have Value!\n";
+        }
+
+        if (errorMessage.length() == 0) {
+            return true;
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initOwner(dialogStage);
+            alert.setTitle("Invalid Fields");
+            alert.setHeaderText("Please correct invalid fields");
+            alert.setContentText(errorMessage);
+
+            alert.showAndWait();
+
+            return false;
+        }
     }
 }
