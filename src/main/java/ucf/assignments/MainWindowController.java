@@ -41,6 +41,21 @@ public class MainWindowController {
             mainApp.getItemData().add(tempItem);
         }
     }
+    @FXML
+    public void editButtonClicked() {
+        handleEditItem();
+    }
+    private void handleEditItem(){
+        Item selectedItem = itemsTableView.getSelectionModel().getSelectedItem();
+        if (selectedItem != null) {
+            boolean okClicked = mainApp.showAddLayout(selectedItem);
+            if (okClicked) {
+                mainApp.showAddLayout(selectedItem);
+            }
+        } else {
+            errorReport();
+        }
+    }
 
     @FXML
     private void deleteButtonClicked() {
@@ -60,9 +75,6 @@ public class MainWindowController {
         handleSaveAs();
     }
     private void handleSaveAs() {
-        /**
-         * save to file
-         */
     }
 
     @FXML
@@ -70,9 +82,6 @@ public class MainWindowController {
         handleLoad();
     }
     private void handleLoad() {
-        /**
-         * load list from file
-         */
     }
 
     @FXML

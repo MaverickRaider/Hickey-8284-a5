@@ -49,6 +49,7 @@
       <HBox spacing="5.0" BorderPane.alignment="CENTER">
          <children>
             <Button mnemonicParsing="false" onAction="#addButtonClicked" prefWidth="75.0" text="Add..." />
+            <Button mnemonicParsing="false" onAction="#editButtonClicked" prefWidth="75.0" text="Edit..." />
             <Button mnemonicParsing="false" onAction="#deleteButtonClicked" prefWidth="75.0" text="Delete" />
          </children>
          <padding>
