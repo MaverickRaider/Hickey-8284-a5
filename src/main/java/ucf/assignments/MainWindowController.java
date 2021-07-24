@@ -97,9 +97,9 @@ public class MainWindowController {
         handleDeleteItem();
     }
     private void handleDeleteItem() {
-        int selectedIndex = itemsTableView.getSelectionModel().getSelectedIndex();
-        if (selectedIndex >= 0) {
-            itemsTableView.getItems().remove(selectedIndex);
+        Item selectedItem = itemsTableView.getSelectionModel().getSelectedItem();
+        if (selectedItem != null) {
+            mainApp.getItemData().remove(selectedItem);
         } else {
             errorReport();
         }
