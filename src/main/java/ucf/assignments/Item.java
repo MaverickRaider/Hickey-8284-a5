@@ -60,6 +60,6 @@ public class Item {
     public String toString() {
         return (this.getItemSerialNumber() + "\t" +
                 this.getItemName() + "\t" +
-                this.getItemValue() + "\n");
+                this.getItemValue());
     }
 }

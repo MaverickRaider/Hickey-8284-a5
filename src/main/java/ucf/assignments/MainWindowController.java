@@ -8,12 +8,10 @@ import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 
 public class MainWindowController {
@@ -116,6 +114,14 @@ public class MainWindowController {
         }
     }
 
+    @FXML
+    private void newButtonClicked() {
+        handleNewButtonClicked();
+    }
+    private void handleNewButtonClicked() {
+        mainApp.getItemData().clear();
+    }
+
     // TSV Save Method
     @FXML
     public void saveAsMenuClicked() {
@@ -136,7 +142,6 @@ public class MainWindowController {
             }
         }
     }
-
     public void saveFile(ObservableList<Item> itemList, File file) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(file));
@@ -161,11 +166,30 @@ public class MainWindowController {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open File");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
-        File file = fileChooser.showSaveDialog(openStage);
+        File file = fileChooser.showOpenDialog(openStage);
         openFile(file);
     }
     public void openFile(File file) {
-        //itemsTableView.setItems();
+        mainApp.getItemData().clear();
+        try {
+            BufferedReader in = new BufferedReader(new FileReader(file));
+            String curLine = in.readLine();
+            while (curLine != null) {
+                Item tempItem = new Item();
+                String[] splitted = curLine.split("\t");
+
+                tempItem.setItemSerialNumber(splitted[0]);
+                tempItem.setItemName(splitted[1]);
+                tempItem.setItemValue(splitted[2]);
+
+                mainApp.getItemData().add(tempItem);
+                curLine = in.readLine();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
