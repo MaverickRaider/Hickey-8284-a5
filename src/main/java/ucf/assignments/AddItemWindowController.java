@@ -79,7 +79,7 @@ public class AddItemWindowController {
         if (itemNameField.getText() == null || itemNameField.getText().length() < 2 || itemNameField.getText().length() > 256) {
             errorMessage += "Error: Must have a Title between 2 - 256 Characters!\n";
         }
-        if (serialNumberField.getText() == null || serialNumberField.getText().length() > 10 || serialNumberField.getText().length() > 10) {
+        if (serialNumberField.getText() == null || serialNumberField.getText().length() < 10 || serialNumberField.getText().length() > 10) {
             errorMessage += "Error: Must have a 10 Character Serial Number!\n";
         }
         if (itemValueField.getText() == null || itemValueField.getText().length() == 0) {

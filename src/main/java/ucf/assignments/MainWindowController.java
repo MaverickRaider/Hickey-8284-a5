@@ -156,6 +156,15 @@ public class MainWindowController {
         handleLoad();
     }
     private void handleLoad() {
+        Stage openStage = new Stage();
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open File");
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        File file = fileChooser.showSaveDialog(openStage);
+        openFile(file);
+    }
+    public void openFile(File file) {
+        //itemsTableView.setItems();
     }
 
     @FXML
