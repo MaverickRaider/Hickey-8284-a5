@@ -1,10 +1,17 @@
 package ucf.assignments;
 
+import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.function.Predicate;
 
 
@@ -48,9 +55,6 @@ public class MainWindowController {
 
                     String lowerCaseFilter = newValue.toLowerCase();
                     if (item.getItemName().toLowerCase().contains(lowerCaseFilter)) {
-                        return true;
-                    }
-                    else if (item.getItemValue().toLowerCase().contains(lowerCaseFilter)) {
                         return true;
                     }
                     else if (item.getItemSerialNumber().toLowerCase().contains(lowerCaseFilter)) {
@@ -110,6 +114,31 @@ public class MainWindowController {
         handleSaveAs();
     }
     private void handleSaveAs() {
+        Stage saveStage = new Stage();
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save As");
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        if(mainApp.getItemData().isEmpty()) {
+            saveErrorReport();
+        }
+        else {
+            File file = fileChooser.showSaveDialog(saveStage);
+            if(file != null) {
+                saveFile(itemsTableView.getItems(), file);
+            }
+        }
+    }
+    public void saveFile(ObservableList<Item> itemList, File file) {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+            for(Item item : itemList) {
+                writer.write(item.toString());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            saveErrorReport();
+        }
     }
 
     @FXML
@@ -145,8 +174,14 @@ public class MainWindowController {
         alert.setTitle("No Selection");
         alert.setHeaderText("No Item Selected");
         alert.setContentText("Please select an Item in the table.");
-
-        // Waits for the user to close the error out
+        alert.showAndWait();
+    }
+    private void saveErrorReport() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.initOwner(mainApp.getPrimaryStage());
+        alert.setTitle("Save Error");
+        alert.setHeaderText("There was an Issue Saving your File.");
+        alert.setContentText("Please review the table and try again.");
         alert.showAndWait();
     }
 
