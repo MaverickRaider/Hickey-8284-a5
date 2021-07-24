@@ -55,4 +55,11 @@ public class Item {
     public StringProperty itemValueProperty() {
         return itemValue;
     }
+
+    @Override
+    public String toString() {
+        return (this.getItemSerialNumber() + " " +
+                this.getItemName() + " " +
+                this.getItemValue() + "\n");
+    }
 }

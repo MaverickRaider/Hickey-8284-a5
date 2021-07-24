@@ -6,8 +6,6 @@ import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 public class AddItemWindowController {
 

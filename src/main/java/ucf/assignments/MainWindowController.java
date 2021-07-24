@@ -12,7 +12,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.function.Predicate;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainWindowController {
@@ -87,6 +88,7 @@ public class MainWindowController {
     private void handleEditItem(){
         Item selectedItem = itemsTableView.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
+            selectedItem.setItemValue(editItemValueFormatter(selectedItem.getItemValue()));
             boolean okClicked = mainApp.showAddLayout(selectedItem);
             if (okClicked) {
                 mainApp.showAddLayout(selectedItem);
@@ -94,6 +96,11 @@ public class MainWindowController {
         } else {
             errorReport();
         }
+    }
+    private String editItemValueFormatter (String str) {
+        String newStr = str.replaceAll("\\$", "");
+        newStr = newStr.replaceAll("\\.", "");
+        return newStr;
     }
 
     @FXML
@@ -128,6 +135,7 @@ public class MainWindowController {
             }
         }
     }
+
     public void saveFile(ObservableList<Item> itemList, File file) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(file));
@@ -135,6 +143,8 @@ public class MainWindowController {
                 writer.write(item.toString());
                 writer.newLine();
             }
+            System.out.println(itemList);
+            writer.close();
         } catch (IOException e) {
             e.printStackTrace();
             saveErrorReport();
