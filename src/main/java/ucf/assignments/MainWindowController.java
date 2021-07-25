@@ -46,7 +46,7 @@ public class MainWindowController {
         this.mainApp = mainApp;
         itemsTableView.setItems(mainApp.getItemData());
 
-        // Converts tablelist into a filtered list for the search function
+        // Converts table list into a filtered list for the search function
         FilteredList<Item> filteredData = new FilteredList<>(mainApp.getItemData());
         itemsTableView.setItems(filteredData);
 
@@ -95,12 +95,12 @@ public class MainWindowController {
         Item selectedItem = itemsTableView.getSelectionModel().getSelectedItem();
         // if there is no item selected, error message appears
         if (selectedItem != null) {
-            selectedItem.setItemValue(editItemValueFormatter(selectedItem.getItemValue()));
             // showAddLayout will be filled with the data that was selected
+            selectedItem.setItemValue(editItemValueFormatter(selectedItem.getItemValue()));
             boolean okClicked = mainApp.showAddLayout(selectedItem);
-            if (okClicked) {
+            /*if (okClicked) {
                 mainApp.showAddLayout(selectedItem);
-            }
+            }*/
         } else {
             errorReport();
         }

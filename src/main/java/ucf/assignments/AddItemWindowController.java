@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class AddItemWindowController {
 
@@ -51,7 +52,7 @@ public class AddItemWindowController {
 
     // If OK clicked, set values to item elements if they are valid by the isInputValid() method
     @FXML
-    public void okClicked() {
+    public void okButtonClicked() {
         handleOkClicked();
     }
     private void handleOkClicked() {
@@ -69,6 +70,7 @@ public class AddItemWindowController {
         BigDecimal answer = new BigDecimal(str);
         BigDecimal divisor = new BigDecimal("100");
         answer = answer.divide(divisor);
+        answer = answer.setScale(2, RoundingMode.CEILING);
         return answer;
     }
 
