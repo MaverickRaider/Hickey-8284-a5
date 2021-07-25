@@ -148,6 +148,11 @@ public class MainWindowController {
         Stage saveStage = new Stage();
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save As");
+
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Text File", ".txt")
+        );
+
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
         // If table is empty, send error
         if(mainApp.getItemData().isEmpty()) {
