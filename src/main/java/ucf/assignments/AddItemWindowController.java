@@ -1,3 +1,8 @@
+/*
+ *  UCF COP3330 Summer 2021 Assignment 5 Solution
+ *  Copyright 2021 Michael Hickey
+ */
+
 package ucf.assignments;
 
 import javafx.fxml.FXML;
@@ -28,6 +33,7 @@ public class AddItemWindowController {
         this.dialogStage = dialogStage;
     }
 
+    // Set up the window with data from preexisting item or blank if new.
     public void setItem(Item item) {
         this.item = item;
 
@@ -43,6 +49,7 @@ public class AddItemWindowController {
         return okClicked;
     }
 
+    // If OK clicked, set values to item elements if they are valid by the isInputValid() method
     @FXML
     public void okClicked() {
         handleOkClicked();
@@ -52,12 +59,12 @@ public class AddItemWindowController {
             item.setItemName(itemNameField.getText());
             item.setItemSerialNumber(serialNumberField.getText());
             item.setItemValue("$" + usCurrencyFormatter(itemValueField.getText()));
-
             okClicked = true;
             dialogStage.close();
         }
     }
 
+    // Converts String to BigDecimal, string is asked to be written in pennies.
     private BigDecimal usCurrencyFormatter (String str) {
         BigDecimal answer = new BigDecimal(str);
         BigDecimal divisor = new BigDecimal("100");
@@ -65,6 +72,7 @@ public class AddItemWindowController {
         return answer;
     }
 
+    // Closes the stage if Cancel clicked
     @FXML
     public void cancelClicked() {
         handleCancelClicked();
@@ -73,7 +81,9 @@ public class AddItemWindowController {
         dialogStage.close();
     }
 
+    // Reviews data before inserted into an item
     private boolean isInputValid() {
+        // If errorMessage has anything in the string, system knows there is an error
         String errorMessage = "";
 
         if (itemNameField.getText() == null || itemNameField.getText().length() < 2 || itemNameField.getText().length() > 256) {
@@ -86,6 +96,7 @@ public class AddItemWindowController {
             errorMessage += "Error: Must have a Value!\n";
         }
 
+        // Checks to see if any error message exists
         if (errorMessage.length() == 0) {
             return true;
         } else {
@@ -96,9 +107,7 @@ public class AddItemWindowController {
             alert.setContentText(errorMessage);
 
             alert.showAndWait();
-
             return false;
         }
     }
-
 }

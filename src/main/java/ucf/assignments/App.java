@@ -21,6 +21,7 @@ public class App extends Application {
 
     private Stage primaryStage;
 
+    // Declare list to hold the items
     private final ObservableList<Item> itemData = FXCollections.observableArrayList();
 
     public App() {
@@ -37,6 +38,7 @@ public class App extends Application {
         showApp();
     }
 
+    // Set up the main app window
     public void showApp() {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -49,12 +51,12 @@ public class App extends Application {
 
             MainWindowController controller = loader.getController();
             controller.setMainApp(this);
-
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    // Set up the add/edit window
     public boolean showAddLayout(Item item) {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -80,8 +82,6 @@ public class App extends Application {
             return false;
         }
     }
-
-
 
     public Stage getPrimaryStage() {
         return primaryStage;
