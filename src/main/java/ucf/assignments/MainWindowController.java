@@ -232,7 +232,10 @@ public class MainWindowController {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Inventory Manager");
         alert.setHeaderText("About");
-        alert.setContentText("This is an Inventory Manager");
+        alert.setContentText("This is an Inventory Manager used to list and track items. " +
+                "Use the 'Add...' button to make a new item for the list and the " +
+                "SaveAs in the File Menu to save the data to a file.\n" +
+                "For more information and Instructions of the app, please read the ReadMe.md");
         alert.showAndWait();
     }
 

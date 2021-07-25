@@ -1,6 +1,6 @@
 @startuml
 
-class InventoryTracker {
+class App {
     start()
     main()
 }
@@ -21,27 +21,34 @@ class MainWindowController {
 
     addItemButtonClicked(EventHandler)
     editItemButtonClicked(EventHandler)
-    removeItemButtonClicked(EventHandler)
-    saveInventoryAsCVSButtonClicked(EventHandler)
-    '...
+    deleteItemButtonClicked(EventHandler)
+    newButtonClicked(EventHandler)
+    saveAsMenuClicked(EventHandler)
+    loadMenuClicked(EventHandler)
+    closeMenuClicked(EventHandler)
+    aboutMenuClicked(EventHandler)
 
-    addItem(String, String BigDecimal)
-    editItem()
-    saveInventoryAsCVS(filename: String)
-    saveInventoryAsHTML(filename: String)
-    saveInventoryAsJSON(filename: String)
+    handleAddItem()
+    handleEditItem()
+    handleDeleteItem()
+    handleNewButtonClicked()
+    handleSaveAs()
+    handleLoad()
+    handleClose()
+    handleAbout()
 }
 
-class AddItemController {
-}
+class AddItemWindowController {
+    items: ItemModel
+    scenes: SceneManager
 
-class EditItemWindowController {
-}
+    cancelClicked(EventHandler)
+    okClicked(EventHandler)
 
-class RemoveItemController {
-}
-
-class SearchItemController {
+    setItem()
+    handleOkClicked()
+    handleCancelClicked()
+    inInputValid()
 }
 
 class Item {
@@ -56,25 +63,13 @@ class Item {
     '...
 }
 
-class FileManger {
-    saveAsCVS(filename: String, data: String)
-    saveAsHTML(filename: String, data: String)
-    saveAsJSON(filename: String, data: String)
-}
-
-openjfx.org.Applications <|-- InventoryTracker
-InventoryTracker -- SceneManager
+openjfx.org.Applications <|-- App
+App -- SceneManager
 SceneManager -- MainWindowController
-SceneManager -- AddItemController
-SceneManager -- EditItemWindowController
-SceneManager -- RemoveItemController
-SceneManager -- SearchItemController
+SceneManager -- AddItemWindowController
 MainWindowController o-- ItemModel
-AddItemController o-- ItemModel
-EditItemWindowController o-- ItemModel
-RemoveItemController o-- ItemModel
-SearchItemController o-- ItemModel
+AddItemWindowController o-- ItemModel
+
 ItemModel *-- Item
-MainWindowController o-- FileManger
 
 @enduml
